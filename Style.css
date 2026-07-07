@@ -1,0 +1,295 @@
+*{
+    box-sizing:border-box;
+    font-family:Tahoma, Arial, sans-serif;
+}
+
+
+body{
+
+    margin:0;
+    min-height:100vh;
+
+    background:
+    radial-gradient(circle at top,#4b3a16,#121212 60%);
+
+    color:white;
+
+}
+
+
+.container{
+
+    width:95%;
+    max-width:600px;
+
+    margin:40px auto;
+
+}
+
+
+header{
+
+    text-align:center;
+
+    background:rgba(0,0,0,0.5);
+
+    padding:20px;
+
+    border-radius:20px;
+
+    border:1px solid #d4af37;
+
+    box-shadow:
+    0 0 20px rgba(212,175,55,.4);
+
+}
+
+
+header h1{
+
+    color:#ffd700;
+
+    font-size:32px;
+
+    margin-bottom:10px;
+
+}
+
+
+header p{
+
+    color:#ddd;
+
+    font-size:16px;
+
+}
+
+
+
+
+.card{
+
+    margin-top:25px;
+
+    background:
+    linear-gradient(145deg,#292929,#111);
+
+    padding:25px;
+
+    border-radius:20px;
+
+    border:1px solid #555;
+
+    box-shadow:
+    0 10px 30px black;
+
+}
+
+
+
+label{
+
+    display:block;
+
+    margin-top:15px;
+
+    margin-bottom:8px;
+
+    color:#ffd700;
+
+    font-size:18px;
+
+}
+
+
+
+
+select,
+input{
+
+
+    width:100%;
+
+    padding:14px;
+
+    border-radius:12px;
+
+    border:none;
+
+    outline:none;
+
+    background:#222;
+
+    color:white;
+
+    font-size:17px;
+
+}
+
+
+
+select:hover,
+input:hover{
+
+    border:1px solid #ffd700;
+
+}
+
+
+
+
+button{
+
+
+    width:100%;
+
+    margin-top:25px;
+
+    padding:15px;
+
+    border:none;
+
+    border-radius:15px;
+
+
+    background:
+
+    linear-gradient(
+        45deg,
+        #d4af37,
+        #ffea70
+    );
+
+
+    color:#111;
+
+    font-size:20px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+
+    transition:.3s;
+
+
+}
+
+
+
+button:hover{
+
+
+    transform:scale(1.03);
+
+    box-shadow:
+    0 0 20px gold;
+
+
+}
+
+
+
+
+.result{
+
+
+    margin-top:25px;
+
+
+    background:
+
+    linear-gradient(
+        145deg,
+        #1e1e1e,
+        #080808
+    );
+
+
+    padding:25px;
+
+
+    border-radius:20px;
+
+
+    border:1px solid #d4af37;
+
+
+    font-size:18px;
+
+
+    line-height:2;
+
+
+    box-shadow:
+
+    0 0 20px rgba(212,175,55,.3);
+
+
+}
+
+
+
+.result h2{
+
+    color:#ffd700;
+
+    text-align:center;
+
+}
+
+
+
+
+
+.gold{
+
+    color:#ffd700;
+
+}
+
+
+
+.green{
+
+    color:#00ff88;
+
+}
+
+
+
+.red{
+
+    color:#ff5555;
+
+}
+
+
+
+
+@media(max-width:600px){
+
+
+    .container{
+
+        width:92%;
+
+        margin-top:20px;
+
+    }
+
+
+    header h1{
+
+        font-size:24px;
+
+    }
+
+
+    .card{
+
+        padding:18px;
+
+    }
+
+}
