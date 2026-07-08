@@ -1,1 +1,119 @@
 
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ماشین حساب نیروهای امپراتوری</title>
+
+<link rel="stylesheet" href="Style.css">
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+    <header>
+
+        <h1>⚔️ ماشین حساب نیروها ⚔️</h1>
+
+        <p>
+            تعداد نیرو را وارد کنید تا هزینه، قدرت و زمان محاسبه شود
+        </p>
+
+    </header>
+
+
+
+    <div class="card">
+
+
+        <label>
+            🛡️ انتخاب نیرو
+        </label>
+
+
+        <select id="troop">
+
+            <option value="zanjir">👹 زنجیرشکن</option>
+
+            <option value="jaloot">👹 جالوت</option>
+
+            <option value="dastderaz">👑 دست‌دراز غول</option>
+
+            <option value="gladiator">⚔️ گلادیاتور</option>
+
+            <option value="gard">👑 گارد سلطنتی</option>
+
+            <option value="shekanshamsher">⚔️ شمشیرشکن</option>
+
+            <option value="negahban">🛡️ نگهبان</option>
+
+            <option value="doshamsher">⚔️ دوشمشیره</option>
+
+            <option value="modafe">🛡️ مدافع</option>
+
+            <option value="jonongar">😈 جنونگر</option>
+
+            <option value="shovaliye">🐎 شوالیه</option>
+
+            <option value="shamsherzan">🗡️ شمشیرزن</option>
+
+            <option value="javidan">👑 جاویدان</option>
+
+            <option value="hoplite">🛡️ هوپلیت</option>
+
+
+        </select>
+
+
+
+        <label>
+            🔢 تعداد
+        </label>
+
+
+        <input 
+        type="number"
+        id="count"
+        value="1"
+        min="1">
+
+
+
+        <button onclick="calculate()">
+
+            ⚔️ محاسبه
+
+        </button>
+
+
+    </div>
+
+
+
+    <div id="result" class="result">
+
+        نتیجه اینجا نمایش داده می‌شود
+
+    </div>
+
+
+
+</div>
+
+
+
+<script src="Hamid.Js"></script>
+
+
+</body>
+
+</html>
