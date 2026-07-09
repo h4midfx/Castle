@@ -1,244 +1,494 @@
 const troops = {
 
-    zanjir:{
-        name:"👹 زنجیرشکن",
-        wheat:321,
-        wood:391,
-        stone:500,
-        iron:149,
-        time:1.45,
-        power:92.85
+    zanjir: {
+        name: "زنجیرشکن",
+        icon: "👹🛡️",
+        wheat: 321,
+        wood: 391,
+        stone: 500,
+        iron: 149,
+        time: 1.45,
+        power: 92.85
     },
 
-
-    jaloot:{
-        name:"👹 جالوت",
-        wheat:539,
-        wood:291,
-        stone:148,
-        iron:57,
-        time:1.15,
-        power:73.75
+    jaloot: {
+        name: "جالوت",
+        icon: "👹🛡️",
+        wheat: 539,
+        wood: 291,
+        stone: 148,
+        iron: 57,
+        time: 1.15,
+        power: 73.75
     },
 
-
-    dastderaz:{
-        name:"👑 دست‌دراز غول",
-        wheat:199,
-        wood:91,
-        stone:128,
-        iron:349,
-        time:1.38,
-        power:68.45
+    dastderaz: {
+        name: "دست‌دراز غول",
+        icon: "👑🛡️",
+        wheat: 199,
+        wood: 91,
+        stone: 128,
+        iron: 349,
+        time: 1.38,
+        power: 68.45
     },
 
-
-    gladiator:{
-        name:"⚔️ گلادیاتور",
-        wheat:235,
-        wood:322,
-        stone:337,
-        iron:349,
-        time:1.42,
-        power:94.35
+    gladiator: {
+        name: "گلادیاتور",
+        icon: "⚔️🏛️",
+        wheat: 235,
+        wood: 322,
+        stone: 337,
+        iron: 349,
+        time: 1.42,
+        power: 94.35
     },
 
-
-    gard:{
-        name:"👑 گارد سلطنتی",
-        wheat:240,
-        wood:244,
-        stone:288,
-        iron:439,
-        time:1.15,
-        power:84.2
+    gard: {
+        name: "گارد سلطنتی",
+        icon: "👑🛡️",
+        wheat: 240,
+        wood: 244,
+        stone: 288,
+        iron: 439,
+        time: 1.15,
+        power: 84.2
     },
 
-
-    shekanshamsher:{
-        name:"⚔️ شمشیرشکن",
-        wheat:203,
-        wood:357,
-        stone:384,
-        iron:258,
-        time:0.50,
-        power:83.85
+    shekanshamsher: {
+        name: "شمشیرشکن",
+        icon: "⚔️🛡️",
+        wheat: 203,
+        wood: 357,
+        stone: 384,
+        iron: 258,
+        time: 0.50,
+        power: 83.85
     },
 
-
-    negahban:{
-        name:"🛡️ نگهبان",
-        wheat:221,
-        wood:210,
-        stone:290,
-        iron:403,
-        time:0.50,
-        power:77.5
+    negahban: {
+        name: "نگهبان",
+        icon: "🛡️🏰",
+        wheat: 221,
+        wood: 210,
+        stone: 290,
+        iron: 403,
+        time: 0.50,
+        power: 77.5
     },
 
-
-    doshamsher:{
-        name:"⚔️ دوشمشیره",
-        wheat:149,
-        wood:148,
-        stone:206,
-        iron:244,
-        time:0.58,
-        power:52.95
+    doshamsher: {
+        name: "دوشمشیره",
+        icon: "⚔️⚔️",
+        wheat: 149,
+        wood: 148,
+        stone: 206,
+        iron: 244,
+        time: 0.58,
+        power: 52.95
     },
 
-
-    modafe:{
-        name:"🛡️ مدافع",
-        wheat:111,
-        wood:140,
-        stone:151,
-        iron:199,
-        time:0.39,
-        power:52.95
+    modafe: {
+        name: "مدافع",
+        icon: "🛡️⚔️",
+        wheat: 111,
+        wood: 140,
+        stone: 151,
+        iron: 199,
+        time: 0.39,
+        power: 52.95
     },
 
-
-    jonongar:{
-        name:"😈 جنونگر",
-        wheat:102,
-        wood:119,
-        stone:131,
-        iron:154,
-        time:0.42,
-        power:47.35
+    jonongar: {
+        name: "جنونگر",
+        icon: "😈⚔️",
+        wheat: 102,
+        wood: 119,
+        stone: 131,
+        iron: 154,
+        time: 0.42,
+        power: 47.35
     },
 
-
-    shovaliye:{
-        name:"🐎 شوالیه",
-        wheat:64,
-        wood:98,
-        stone:103,
-        iron:159,
-        time:0.53,
-        power:42.1
+    shovaliye: {
+        name: "شوالیه",
+        icon: "🛡️🐎",
+        wheat: 64,
+        wood: 98,
+        stone: 103,
+        iron: 159,
+        time: 0.53,
+        power: 42.1
     },
 
-
-    shamsherzan:{
-        name:"🗡️ شمشیرزن",
-        wheat:61,
-        wood:85,
-        stone:77,
-        iron:117,
-        time:0.45,
-        power:35.1
+    shamsherzan: {
+        name: "شمشیرزن",
+        icon: "⚔️🗡️",
+        wheat: 61,
+        wood: 85,
+        stone: 77,
+        iron: 117,
+        time: 0.45,
+        power: 35.1
     },
 
-
-    javidan:{
-        name:"👑 جاویدان",
-        wheat:398,
-        wood:392,
-        stone:304,
-        iron:500,
-        time:1.40,
-        power:95.3
+    javidan: {
+        name: "جاویدان",
+        icon: "👑🛡️",
+        wheat: 398,
+        wood: 392,
+        stone: 304,
+        iron: 500,
+        time: 1.40,
+        power: 95.3
+    } ,   javidan: {
+        name: "👑 جاویدان",
+        wheat: 398,
+        wood: 392,
+        stone: 304,
+        iron: 500,
+        time: 1.40,
+        power: 95.3,
+        icon: "👑🛡️"
     },
 
+    hoplite: {
+        name: "🛡️ هوپلیت",
+        wheat: 209,
+        wood: 301,
+        stone: 234,
+        iron: 367,
+        time: 1.13,
+        power: 84.2,
+        icon: "🛡️🗡️"
+    },
 
-    hoplite:{
-        name:"🛡️ هوپلیت",
-        wheat:209,
-        wood:301,
-        stone:234,
-        iron:367,
-        time:1.13,
-        power:84.2
+    tirandaz: {
+        name: "🏹 تیرانداز",
+        wheat: 104,
+        wood: 164,
+        stone: 147,
+        iron: 83,
+        time: 0.46,
+        power: 46.35,
+        icon: "🏹🎯"
+    },
+
+    zobin: {
+        name: "🏹🗡️ زوبین زن",
+        wheat: 114,
+        wood: 181,
+        stone: 166,
+        iron: 111,
+        time: 0.39,
+        power: 60.85,
+        icon: "🏹🗡️"
+    },
+
+    shekarchi: {
+        name: "🏹 شکارچی",
+        wheat: 171,
+        wood: 229,
+        stone: 204,
+        iron: 151,
+        time: 0.52,
+        power: 60.85,
+        icon: "🏹"
+    },
+
+    tiratashin: {
+        name: "🔥🏹 تیرآتشین",
+        wheat: 216,
+        wood: 321,
+        stone: 265,
+        iron: 239,
+        time: 0.59,
+        power: 76.5,
+        icon: "🔥🏹"
+    },
+
+    oghab: {
+        name: "🦅 عقاب",
+        wheat: 253,
+        wood: 377,
+        stone: 307,
+        iron: 257,
+        time: 1.13,
+        power: 81.65,
+        icon: "🦅⚔️"
+    },
+
+    yakhzad: {
+        name: "❄️ یخزاد",
+        wheat: 187,
+        wood: 307,
+        stone: 459,
+        iron: 333,
+        time: 1.23,
+        power: 88.2,
+        icon: "❄️⚔️"
+    },
+
+    nokhbe: {
+        name: "👑 نخبه",
+        wheat: 255,
+        wood: 460,
+        stone: 249,
+        iron: 325,
+        time: 1.30,
+        power: 91.95,
+        icon: "👑⚔️"
+    },
+
+    savarkar: {
+        name: "🏇 سوارکار",
+        wheat: 101,
+        wood: 52,
+        stone: 99,
+        iron: 76,
+        time: 0.50,
+        power: 29.2,
+        icon: "🏇"
+    },
+
+    barkesh: {
+        name: "🏇 بارکش",
+        wheat: 290,
+        wood: 328,
+        stone: 189,
+        iron: 148,
+        time: 1.13,
+        power: 29.6,
+        icon: "🏇🗡️"
+    },
+
+    savarnize: {
+        name: "🏇 سوارنیزه",
+        wheat: 169,
+        wood: 83,
+        stone: 106,
+        iron: 89,
+        time: 0.58,
+        power: 39.7,
+        icon: "🏇🗡️"
+    },
+
+    tabarzindar: {
+        name: "🪓 تبرزیندار",
+        wheat: 174,
+        wood: 228,
+        stone: 257,
+        iron: 283,
+        time: 1.05,
+        power: 75.65,
+        icon: "🪓🛡️"
+    },
+
+    nizeboland: {
+        name: "🗡️ نیزه بلند",
+        wheat: 92,
+        wood: 106,
+        stone: 221,
+        iron: 258,
+        time: 0.34,
+        power: 65.9,
+        icon: "🗡️🏹"
+    },
+
+    nizebortab: {
+        name: "🗡️ نیزه برتاب",
+        wheat: 106,
+        wood: 173,
+        stone: 121,
+        iron: 166,
+        time: 1.07,
+        power: 57.7,
+        icon: "🗡️🏹"
+    },
+        divar: {
+        name: "🧱 دیوار دفاعی",
+        wheat: 100,
+        wood: 123,
+        stone: 128,
+        iron: 149,
+        time: 0.49,
+        power: 55.25,
+        icon: "🧱🛡️"
+    },
+
+    nizeandaz: {
+        name: "🗡️ نیزه انداز",
+        wheat: 63,
+        wood: 89,
+        stone: 146,
+        iron: 133,
+        time: 0.41,
+        power: 47,
+        icon: "🗡️🏹"
+    },
+
+    kamandar: {
+        name: "🏹 کماندار",
+        wheat: 58,
+        wood: 116,
+        stone: 84,
+        iron: 56,
+        time: 0.42,
+        power: 33.95,
+        icon: "🏹🎯"
+    },
+
+    zahreban: {
+        name: "🏹 زهربان",
+        wheat: 91,
+        wood: 137,
+        stone: 94,
+        iron: 8,
+        time: 1.10,
+        power: 45.55,
+        icon: "🏹🎯"
+    },
+
+    gari: {
+        name: "🛒 گاری",
+        wheat: 589,
+        wood: 633,
+        stone: 257,
+        iron: 212,
+        time: 0.57,
+        power: 53.65,
+        icon: "🛒"
+    },
+
+    arabe: {
+        name: "🏹 ارابه ران",
+        wheat: 120,
+        wood: 100,
+        stone: 150,
+        iron: 80,
+        time: 0.25,
+        power: 55.1,
+        icon: "🏹🛞"
+    },
+
+    saye: {
+        name: "🗡️ سایه سوار",
+        wheat: 582,
+        wood: 347,
+        stone: 221,
+        iron: 361,
+        time: 1.21,
+        power: 88.4,
+        icon: "🗡️"
+    },
+
+    zerehi: {
+        name: "🐎 سوار نظام زرهی",
+        wheat: 521,
+        wood: 333,
+        stone: 249,
+        iron: 552,
+        time: 1.57,
+        power: 98.2,
+        icon: "🐎"
+    },
+
+    sag: {
+        name: "🐕 سگ شکاری",
+        wheat: 176,
+        wood: 133,
+        stone: 177,
+        iron: 33,
+        time: 0.50,
+        power: 51.5,
+        icon: "🐕"
+    },
+
+    kargin: {
+        name: "🦾 کارگین",
+        wheat: 188,
+        wood: 99,
+        stone: 221,
+        iron: 219,
+        time: 0.44,
+        power: 51.5,
+        icon: "🦾"
+    },
+
+    gav: {
+        name: "🦬 گاومیش",
+        wheat: 91,
+        wood: 91,
+        stone: 321,
+        iron: 262,
+        time: 1.30,
+        power: 59.35,
+        icon: "🦬"
+    },
+
+    fil: {
+        name: "🐘 فیل",
+        wheat: 203,
+        wood: 203,
+        stone: 446,
+        iron: 234,
+        time: 1.30,
+        power: 76.65,
+        icon: "🐘"
+    },
+
+    kargadan: {
+        name: "🦏 کرگدن",
+        wheat: 343,
+        wood: 306,
+        stone: 446,
+        iron: 303,
+        time: 1.13,
+        power: 89.4,
+        icon: "🦏"
+    },
+
+    khers: {
+        name: "🐻 خرس",
+        wheat: 468,
+        wood: 439,
+        stone: 321,
+        iron: 368,
+        time: 1.19,
+        power: 95.65,
+        icon: "🐻"
     }
 
 };
+function calculate() {
 
-
-
-
-
-function calculate(){
-
-
-    let type =
-    document.getElementById("troop").value;
-
-
-    let count =
-    Number(document.getElementById("count").value);
-
-
+    let type = document.getElementById("troop").value;
+    let count = Number(document.getElementById("count").value);
 
     let troop = troops[type];
-
-
-
     let result = document.getElementById("result");
 
-
-
-    if(count <= 0){
-
-        result.innerHTML =
-        "❌ لطفاً تعداد درست وارد کنید";
-
+    if (count <= 0) {
+        result.innerHTML = "❌ لطفاً تعداد درست وارد کنید";
         return;
-
     }
 
-
-
+    let wheat = troop.wheat * count;
+    let wood = troop.wood * count;
+    let stone = troop.stone * count;
+    let iron = troop.iron * count;
+    let time = troop.time * count;
+    let power = Math.floor(troop.power * count);
 
     result.innerHTML = `
+        <h2>${troop.icon} ${count} ${troop.name}</h2>
 
-
-    <h2>${troop.name}</h2>
-
-
-    ⚔️ قدرت:
-    <span class="green">
-    ${Math.floor(troop.power * count)}
-    </span>
-
-    <br>
-
-
-    🌾 گندم:
-    ${troop.wheat * count}
-
-
-    <br>
-
-
-    🪵 چوب:
-    ${troop.wood * count}
-
-
-    <br>
-
-
-    🪨 سنگ:
-    ${troop.stone * count}
-
-
-    <br>
-
-
-    ⛏️ آهن:
-    ${troop.iron * count}
-
-
-    <br>
-
-
-    ⏱️ زمان:
-    ${(troop.time * count).toFixed(2)}
-    دقیقه
-
-
+        <p>⚔️ قدرت: ${power}</p>
+        <p>🌾 گندم: ${wheat}</p>
+        <p>🪵 چوب: ${wood}</p>
+        <p>🪨 سنگ: ${stone}</p>
+        <p>⛏️ آهن: ${iron}</p>
+        <p>⏱️ زمان: ${time.toFixed(2)} دقیقه</p>
     `;
-
 
 }
