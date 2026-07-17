@@ -141,17 +141,7 @@ const troops = {
         iron: 500,
         time: 1.40,
         power: 95.3
-    } ,   javidan: {
-        name: "👑 جاویدان",
-        wheat: 398,
-        wood: 392,
-        stone: 304,
-        iron: 500,
-        time: 1.40,
-        power: 95.3,
-        icon: "👑🛡️"
     },
-
     hoplite: {
         name: "🛡️ هوپلیت",
         wheat: 209,
@@ -457,7 +447,58 @@ const troops = {
         time: 1.19,
         power: 95.65,
         icon: "🐻"
+    },
+    kuli: {
+        name: "🦍 کولی",
+        wheat: 111,
+        wood: 147,
+        stone: 232,
+        iron: 277,
+        time: 0.47,
+        power: 62,
+        icon: "🦍"
+    },
+    Shirdel: {
+        name: "🦁 شیردل",
+        wheat: 368,
+        wood: 384,
+        stone: 186,
+        iron: 209,
+        time: 1.05,
+        power: 74.55,
+        icon: "🦁"
+    },
+    mogul: {
+        name: "👑 مغول",
+        wheat: 354,
+        wood: 409,
+        stone: 216,
+        iron: 239,
+        time: 1.21,
+        power: 83.65,
+        icon: "👑"
+    },
+    aztak: {
+        name: "🦖 آتزاك",
+        wheat: 90,
+        wood: 469,
+        stone: 432,
+        iron: 184,
+        time: 1.45,
+        power: 93,
+        icon: "🦖"
+    },
+    barbar: {   
+        name: "🪓 بربر",
+        wheat: 303,
+        wood: 472,
+        stone: 157,
+        iron: 239,
+        time: 1.37,
+        power: 88.9,
+        icon: "🪓"
     }
+
 
 };
 function calculate() {
@@ -477,9 +518,18 @@ function calculate() {
     let wood = troop.wood * count;
     let stone = troop.stone * count;
     let iron = troop.iron * count;
-    let time = troop.time * count;
-    let power = Math.floor(troop.power * count);
 
+let time = toMinutes(troop.time) * count;
+    let power = Math.floor(troop.power * count);
+let gold = Math.round(time * (350 / 60));
+function toMinutes(time) {
+    const minutes = Math.floor(time);
+    const seconds = Math.round((time - minutes) * 100);
+    return minutes + seconds / 60;
+}
+
+
+console.log(time);
     result.innerHTML = `
         <h2>${troop.icon} ${count} ${troop.name}</h2>
 
@@ -489,6 +539,7 @@ function calculate() {
         <p>🪨 سنگ: ${stone}</p>
         <p>⛏️ آهن: ${iron}</p>
         <p>⏱️ زمان: ${time.toFixed(2)} دقیقه</p>
+        <p>🪙 معادل طلای کل آیتم‌ها: ${gold}</p>
     `;
 
 }
