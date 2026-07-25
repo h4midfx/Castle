@@ -1,139 +1,829 @@
+
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
-
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<button onclick="location.href='Attack.html'">
-    ⚔️ Operations Dashboard
-</button>
-<title>ماشین حساب نیروهای امپراتوری</title>
-
-<link rel="stylesheet" href="Style.css">
-
-</head>
-
-
-<body>
-
-
-<div class="container">
-
-
-    <header>
-
-        <h1>⚔️ ماشین حساب نیروها ⚔️</h1>
-        <h2>در حال به‌روزرسانی</h2>
-        <p>
-            تعداد نیرو را وارد کنید تا هزینه، قدرت و زمان محاسبه شود
-        </p>
-
-    </header>
-    <div class="textInformation" onclick="toggleInfo()">
-    i
-</div>
-
-
-
-
-    <div class="card">
-        
-        
-        <label>
-            🛡️ انتخاب نیرو
-        </label>
-        
-        
-        <select id="troop">
-               <optgroup label="شمشیرزن‌">
-            <option value="shamsherzan">🗡️ شمشیرزن</option>
-            <option value="jonongar">😈 جنونگر</option>
-            <option value="modafe">🛡️ مدافع</option>
-            <option value="doshamsher">⚔️ دوشمشیره</option>
-            <option value="negahban">🛡️ نگهبان</option>
-            <option value="shovaliye">🐎 شوالیه</option>
-            <option value="shekanshamsher">⚔️ شمشیرشکن</option>
-            <option value="gard">👑 گارد سلطنتی</option>
-            <option value="gladiator">⚔️ گلادیاتور</option>
-        </optgroup>
-        <optgroup label="کمانداران">
-    <option value="tirandaz">🏹 تیرانداز</option>
-    <option value="zobin">🏹 زوبین‌زن</option>
-    <option value="oghab">🦅 عقاب</option>
-</optgroup>
-
-<optgroup label="حیوانات">
-    <option value="khers">🐻 خرس</option>
-    <option value="fil">🐘 فیل</option>
-</optgroup>
-            <optgroup label="غول‌ها"></optgroup>
-            <option value="dastderaz">👑 دست‌دراز </option>
-            <option value="jaloot">👹 جالوت</option>
-
-            <option value="zanjir">👹 زنجیرشکن</option>
-        </optgroup>
-        <optgroup label="نیزه‌دار ">
-            <option value="javidan">👑 جاویدان</option>
-            
-            <option value="hoplite">🛡️ هوپلیت</option>
-        </optgroup>
-     
-
-
-<optgroup label="کولی">
-    
-    <option value="kuli">🦍 کولی</option>
-<option value="Shirdel">🦁 شیردل</option>
-<option value="mogul">👑 مغول</option>
-<option value="aztak">🦖 آتزاك</option>
-<option value="barbar">🪓 بربر</option>
-</optgroup>
-        </select>
-
-
-
-        <label>
-            🔢 تعداد
-        </label>
-
-
-        <input 
-        type="number"
-        id="count"
-        value="1"
-        min="1">
-
-
-
-        <button onclick="calculate()">
-
-            ⚔️ محاسبه
-
-        </button>
-
-
-    </div>
-
-
-
-    <div id="result" class="result">
-
-        نتیجه اینجا نمایش داده می‌شود
-
-    </div>
-
-
-
-</div>
-
-
-
-<script src="Hamid.Js">
+<title>اتاق جنگ | پایگاه فرماندهی</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0f141c;
+    --bg-grid: #141b26;
+    --panel: #1a222d;
+    --panel-2: #212b38;
+    --border: #2b3849;
+    --gold: #c9a227;
+    --gold-dim: #8a721e;
+    --steel: #7c93ab;
+    --red: #b8433a;
+    --green: #5f8d5b;
+    --text: #e9e4d6;
+    --text-muted: #93a0ae;
+    --radius: 10px;
+    --font: 'Vazirmatn', Tahoma, sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    font-family: var(--font);
+    background:
+      radial-gradient(ellipse at top left, rgba(201,162,39,0.06), transparent 55%),
+      repeating-linear-gradient(0deg, var(--bg-grid) 0 1px, transparent 1px 48px),
+      repeating-linear-gradient(90deg, var(--bg-grid) 0 1px, transparent 1px 48px),
+      var(--bg);
+    color: var(--text);
+    min-height:100vh;
+    direction: rtl;
+  }
+  ::selection{ background: var(--gold); color:#1a1a1a; }
+  button{ font-family: var(--font); cursor:pointer; }
+  input, textarea{ font-family: var(--font); }
  
+  .screen{ display:none; min-height:100vh; }
+  .screen.active{ display:block; animation: fadein .35s ease; }
+  @keyframes fadein{ from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);} }
+ 
+  /* ---------- Login ---------- */
+  #loginScreen.active{ display:flex; align-items:center; justify-content:center; padding:20px; }
+  .login-card{
+    width:100%; max-width:380px;
+    background: linear-gradient(180deg, var(--panel-2), var(--panel));
+    border:1px solid var(--border);
+    border-radius: var(--radius);
+    padding:34px 28px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.45);
+    position:relative;
+    overflow:hidden;
+  }
+  .login-card::before{
+    content:"";
+    position:absolute; inset:0;
+    background: linear-gradient(120deg, transparent 40%, rgba(201,162,39,0.08) 50%, transparent 60%);
+    pointer-events:none;
+  }
+  .badge-emblem{
+    width:64px; height:64px; margin:0 auto 14px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .login-card h1{
+    text-align:center; font-size:20px; font-weight:800; letter-spacing:.5px;
+    margin:0 0 4px; color: var(--gold);
+  }
+  .login-card p.sub{
+    text-align:center; color:var(--text-muted); font-size:13px; margin:0 0 24px;
+  }
+  .field{ margin-bottom:14px; }
+  .field label{ display:block; font-size:12px; color:var(--text-muted); margin-bottom:6px; }
+  .field input{
+    width:100%; padding:11px 12px; border-radius:8px;
+    border:1px solid var(--border); background:#141b24; color:var(--text);
+    font-size:14px; outline:none; transition: border-color .15s;
+  }
+  .field input:focus{ border-color: var(--gold); }
+  .btn{
+    width:100%; padding:12px; border-radius:8px; border:none;
+    font-weight:700; font-size:14px; letter-spacing:.3px; transition: transform .1s, filter .15s;
+  }
+  .btn:active{ transform: scale(.98); }
+  .btn-gold{ background: linear-gradient(180deg,#dab741,var(--gold)); color:#1a1300; }
+  .btn-gold:hover{ filter:brightness(1.08); }
+  .btn-outline{ background:transparent; border:1px solid var(--border); color:var(--text); }
+  .btn-outline:hover{ border-color: var(--gold); color: var(--gold); }
+  .btn-red{ background: linear-gradient(180deg,#cf5148,var(--red)); color:#fff; }
+  .btn-sm{ padding:7px 12px; font-size:12px; width:auto; border-radius:6px; }
+  .login-error{
+    color:#ff9d92; font-size:12px; text-align:center; min-height:16px; margin-bottom:8px;
+  }
+  .first-run-box{
+    margin-top:18px; padding:14px; border-radius:8px;
+    background:#141b24; border:1px dashed var(--gold-dim);
+    font-size:12.5px; line-height:1.9; color: var(--text-muted);
+  }
+  .first-run-box b{ color:var(--gold); }
+  .code-pill{
+    display:inline-block; direction:ltr; background:#0f141c; border:1px solid var(--border);
+    padding:2px 8px; border-radius:5px; color:var(--text); font-family: 'Courier New', monospace; letter-spacing:1px;
+  }
+ 
+  /* ---------- Shared layout ---------- */
+  .topbar{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:14px 22px; background: var(--panel);
+    border-bottom:1px solid var(--border);
+    position:sticky; top:0; z-index:10;
+  }
+  .topbar .who{ display:flex; align-items:center; gap:10px; }
+  .rank-badge{ width:30px; height:30px; flex:none; }
+  .who-name{ font-size:13px; font-weight:700; }
+  .who-role{ font-size:11px; color: var(--text-muted); }
+  .topbar-actions{ display:flex; gap:8px; }
+  .icon-btn{
+    background:transparent; border:1px solid var(--border); color:var(--text-muted);
+    border-radius:7px; padding:8px 12px; font-size:12px; display:flex; align-items:center; gap:6px;
+  }
+  .icon-btn:hover{ color: var(--gold); border-color: var(--gold); }
+ 
+  .container{ max-width:900px; margin:0 auto; padding:26px 18px 60px; }
+  .page-title{ display:flex; align-items:center; gap:10px; margin-bottom:22px; }
+  .page-title h2{ margin:0; font-size:19px; font-weight:800; }
+  .page-title .eyebrow{ font-size:11px; color:var(--gold); letter-spacing:1px; }
+ 
+  /* ---------- Menu ---------- */
+  .menu-grid{
+    display:grid; grid-template-columns: repeat(2, 1fr); gap:16px;
+    max-width:640px; margin:40px auto 0; padding:0 18px;
+  }
+  @media(max-width:520px){ .menu-grid{ grid-template-columns:1fr; } }
+  .tile{
+    background: linear-gradient(180deg, var(--panel-2), var(--panel));
+    border:1px solid var(--border); border-radius: var(--radius);
+    padding:26px 18px; text-align:center; transition: transform .15s, border-color .15s;
+    display:flex; flex-direction:column; align-items:center; gap:10px;
+  }
+  .tile:hover{ transform: translateY(-3px); border-color: var(--gold); }
+  .tile .tile-icon{ width:38px; height:38px; }
+  .tile .tile-label{ font-size:14px; font-weight:700; }
+  .tile .tile-sub{ font-size:11px; color:var(--text-muted); }
+  .menu-header{ text-align:center; margin-top:26px; }
+  .menu-header .emblem-lg{ width:56px; height:56px; margin:0 auto 10px; }
+  .menu-header h2{ margin:0; font-size:20px; }
+  .menu-header p{ color:var(--text-muted); font-size:12.5px; margin-top:4px; }
+ 
+  /* ---------- Cards / posts ---------- */
+  .composer{
+    background: var(--panel); border:1px solid var(--border); border-radius: var(--radius);
+    padding:16px; margin-bottom:20px;
+  }
+  .composer textarea{
+    width:100%; min-height:70px; resize:vertical; background:#141b24; color:var(--text);
+    border:1px solid var(--border); border-radius:8px; padding:10px; font-size:13.5px; outline:none;
+  }
+  .composer textarea:focus{ border-color: var(--gold); }
+  .composer-foot{ display:flex; justify-content:flex-end; margin-top:10px; }
+  .composer-foot .btn{ width:auto; padding:9px 20px; }
+ 
+  .post{
+    background: var(--panel); border:1px solid var(--border); border-radius: var(--radius);
+    padding:16px 16px 10px; margin-bottom:14px;
+  }
+  .post.attack{ border-inline-start:3px solid var(--red); }
+  .post.notice{ border-inline-start:3px solid var(--gold); }
+  .post-head{ display:flex; align-items:center; justify-content:space-between; margin-bottom:8px; }
+  .post-author{ display:flex; align-items:center; gap:8px; font-size:12.5px; }
+  .author-badge{ width:20px; height:20px; }
+  .post-time{ font-size:11px; color:var(--text-muted); }
+  .post-text{ font-size:14px; line-height:1.9; white-space:pre-wrap; margin:6px 0 12px; }
+  .post-actions{ display:flex; gap:14px; border-top:1px solid var(--border); padding-top:9px; margin-top:4px; }
+  .action-btn{
+    background:transparent; border:none; color:var(--text-muted); font-size:12.5px;
+    display:flex; align-items:center; gap:5px; padding:5px 4px;
+  }
+  .action-btn:hover{ color: var(--gold); }
+  .action-btn.liked{ color: var(--red); }
+  .action-btn svg{ width:15px; height:15px; }
+ 
+  .comments{ margin-top:10px; display:none; }
+  .comments.open{ display:block; }
+  .comment{
+    display:flex; justify-content:space-between; gap:8px; padding:8px 0;
+    border-top:1px solid #223; font-size:12.5px;
+  }
+  .comment:first-child{ border-top:none; }
+  .comment b{ color: var(--steel); font-weight:700; }
+  .comment-input-row{ display:flex; gap:8px; margin-top:8px; }
+  .comment-input-row input{
+    flex:1; padding:9px 10px; border-radius:7px; border:1px solid var(--border);
+    background:#141b24; color:var(--text); font-size:12.5px; outline:none;
+  }
+  .comment-input-row input:focus{ border-color:var(--gold); }
+  .comment-input-row button{
+    padding:8px 14px; border-radius:7px; border:none; background:var(--gold); color:#1a1300;
+    font-size:12px; font-weight:700;
+  }
+  .empty-state{
+    text-align:center; color:var(--text-muted); font-size:13px; padding:40px 10px;
+    border:1px dashed var(--border); border-radius:var(--radius);
+  }
+ 
+  /* ---------- Alliance ---------- */
+  .parchment{
+    background: linear-gradient(180deg, var(--panel-2), var(--panel));
+    border:1px solid var(--border); border-radius: var(--radius);
+    padding:22px; font-size:14px; line-height:2; white-space:pre-wrap; min-height:120px;
+  }
+  .alliance-meta{ font-size:11px; color:var(--text-muted); margin-top:12px; text-align:left; direction:ltr; }
+  .alliance-edit-row{ margin-top:14px; display:flex; gap:8px; justify-content:flex-end; }
+ 
+  /* ---------- Calculator ---------- */
+  .calc-wrap{ max-width:320px; margin:0 auto; }
+  .calc-screen{
+    background:#0d1218; border:1px solid var(--border); border-radius:10px;
+    padding:20px 16px; text-align:left; direction:ltr; margin-bottom:14px;
+  }
+  .calc-expr{ color:var(--text-muted); font-size:13px; min-height:16px; font-family:'Courier New',monospace; }
+  .calc-result{ color:var(--gold); font-size:32px; font-weight:800; font-family:'Courier New',monospace; overflow-x:auto; }
+  .calc-grid{ display:grid; grid-template-columns: repeat(4,1fr); gap:8px; }
+  .calc-btn{
+    padding:16px 0; border-radius:8px; border:1px solid var(--border); background: var(--panel);
+    color:var(--text); font-size:16px; font-weight:600;
+  }
+  .calc-btn:hover{ border-color: var(--gold); }
+  .calc-btn.op{ background: var(--panel-2); color: var(--gold); }
+  .calc-btn.eq{ background: linear-gradient(180deg,#dab741,var(--gold)); color:#1a1300; }
+  .calc-btn.clear{ color: var(--red); }
+ 
+  /* ---------- Admin panel ---------- */
+  .admin-section{
+    background: var(--panel); border:1px solid var(--border); border-radius: var(--radius);
+    padding:16px; margin-bottom:18px;
+  }
+  .admin-section h3{ margin:0 0 12px; font-size:14px; color: var(--gold); }
+  .user-row{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:9px 0; border-top:1px solid #223; font-size:13px;
+  }
+  .user-row:first-child{ border-top:none; }
+  .user-row .u-role{ font-size:10.5px; padding:2px 8px; border-radius:20px; }
+  .u-role.admin{ background: rgba(201,162,39,.15); color: var(--gold); }
+  .u-role.user{ background: rgba(124,147,171,.15); color: var(--steel); }
+  .new-cred-box{
+    margin-top:12px; padding:12px; border-radius:8px; background:#141b24;
+    border:1px dashed var(--gold-dim); font-size:13px; line-height:2;
+  }
+  .toast{
+    position:fixed; bottom:20px; left:50%; transform:translateX(-50%);
+    background: var(--panel-2); border:1px solid var(--gold); color:var(--text);
+    padding:10px 18px; border-radius:8px; font-size:12.5px; z-index:100;
+    opacity:0; pointer-events:none; transition: opacity .25s;
+  }
+  .toast.show{ opacity:1; }
+ 
+  .back-row{ margin-bottom:16px; }
+  .loading-line{ text-align:center; color:var(--text-muted); font-size:12.5px; padding:20px; }
+</style>
+</head>
+<body>
+ 
+<!-- ============ LOGIN SCREEN ============ -->
+<div id="loginScreen" class="screen active">
+  <div class="login-card">
+    <div class="badge-emblem">
+      <svg viewBox="0 0 64 64" fill="none">
+        <path d="M32 4 L58 14 V30 C58 46 47 56 32 60 C17 56 6 46 6 30 V14 Z" fill="#1a222d" stroke="#c9a227" stroke-width="2"/>
+        <path d="M32 16 L32 40 M22 24 L42 24" stroke="#c9a227" stroke-width="3" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <h1>اتاق جنگ</h1>
+    <p class="sub">برای ورود به پایگاه فرماندهی، اطلاعات خود را وارد کنید</p>
+ 
+    <div class="field">
+      <label>نام کاربری</label>
+      <input type="text" id="loginUser" autocomplete="off" placeholder="مثلاً jang482">
+    </div>
+    <div class="field">
+      <label>رمز عبور</label>
+      <input type="password" id="loginPass" autocomplete="off" placeholder="رمز عبور">
+    </div>
+    <div class="login-error" id="loginError"></div>
+    <button class="btn btn-gold" onclick="doLogin()">ورود به پایگاه</button>
+ 
+    <div id="firstRunBox" class="first-run-box" style="display:none;"></div>
+  </div>
+</div>
+ 
+<!-- ============ MENU SCREEN ============ -->
+<div id="menuScreen" class="screen">
+  <div class="topbar">
+    <div class="who">
+      <span class="rank-badge" id="menuRankBadge"></span>
+      <div>
+        <div class="who-name" id="menuWhoName">-</div>
+        <div class="who-role" id="menuWhoRole">-</div>
+      </div>
+    </div>
+    <div class="topbar-actions">
+      <button class="icon-btn" id="adminPanelBtn" style="display:none;" onclick="showScreen('adminScreen')">پنل مدیریت</button>
+      <button class="icon-btn" onclick="logout()">خروج</button>
+    </div>
+  </div>
+  <div class="menu-header">
+    <div class="emblem-lg">
+      <svg viewBox="0 0 64 64" fill="none">
+        <path d="M32 4 L58 14 V30 C58 46 47 56 32 60 C17 56 6 46 6 30 V14 Z" fill="#1a222d" stroke="#c9a227" stroke-width="2"/>
+        <path d="M32 16 L32 40 M22 24 L42 24" stroke="#c9a227" stroke-width="3" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <h2>پایگاه فرماندهی</h2>
+    <p>یکی از بخش‌ها را انتخاب کنید</p>
+  </div>
+  <div class="menu-grid">
+    <button class="tile" onclick="openNotifications()">
+      <svg class="tile-icon" viewBox="0 0 24 24" fill="none" stroke="#c9a227" stroke-width="1.8"><path d="M12 2a6 6 0 00-6 6v3.6c0 .8-.3 1.6-.9 2.2L4 15h16l-1.1-1.2c-.6-.6-.9-1.4-.9-2.2V8a6 6 0 00-6-6z"/><path d="M9 18a3 3 0 006 0"/></svg>
+      <div class="tile-label">اطلاعیه‌ها</div>
+      <div class="tile-sub">پیام‌های فرماندهی</div>
+    </button>
+    <button class="tile" onclick="openTargets()">
+      <svg class="tile-icon" viewBox="0 0 24 24" fill="none" stroke="#b8433a" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1" fill="#b8433a"/></svg>
+      <div class="tile-label">هدف حمله</div>
+      <div class="tile-sub">اهداف تعیین‌شده</div>
+    </button>
+    <button class="tile" onclick="openAlliance()">
+      <svg class="tile-icon" viewBox="0 0 24 24" fill="none" stroke="#5f8d5b" stroke-width="1.8"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"/></svg>
+      <div class="tile-label">اطلاعات اتحاد</div>
+      <div class="tile-sub">وضعیت هم‌پیمانان</div>
+    </button>
+    <button class="tile" onclick="openCalculator()">
+      <svg class="tile-icon" viewBox="0 0 24 24" fill="none" stroke="#7c93ab" stroke-width="1.8"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="7" x2="16" y2="7"/><line x1="8" y1="12" x2="8" y2="12"/><line x1="12" y1="12" x2="12" y2="12"/><line x1="16" y1="12" x2="16" y2="12"/><line x1="8" y1="16" x2="8" y2="16"/><line x1="12" y1="16" x2="12" y2="16"/><line x1="16" y1="16" x2="16" y2="16"/></svg>
+      <div class="tile-label">ماشین‌حساب</div>
+      <div class="tile-sub">محاسبات سریع</div>
+    </button>
+  </div>
+</div>
+ 
+<!-- ============ NOTIFICATIONS SCREEN ============ -->
+<div id="notifScreen" class="screen">
+  <div class="topbar">
+    <div class="who"><strong style="font-size:14px;">اطلاعیه‌ها</strong></div>
+    <div class="topbar-actions"><button class="icon-btn" onclick="showScreen('menuScreen')">بازگشت به منو</button></div>
+  </div>
+  <div class="container">
+    <div class="page-title">
+      <div>
+        <div class="eyebrow">پیام فرماندهی</div>
+        <h2>اطلاعیه‌ها</h2>
+      </div>
+    </div>
+    <div id="notifComposer"></div>
+    <div id="notifList"><div class="loading-line">در حال بارگذاری...</div></div>
+  </div>
+</div>
+ 
+<!-- ============ TARGETS SCREEN ============ -->
+<div id="targetScreen" class="screen">
+  <div class="topbar">
+    <div class="who"><strong style="font-size:14px;">هدف حمله</strong></div>
+    <div class="topbar-actions"><button class="icon-btn" onclick="showScreen('menuScreen')">بازگشت به منو</button></div>
+  </div>
+  <div class="container">
+    <div class="page-title">
+      <div>
+        <div class="eyebrow">فقط فرمانده می‌تواند هدف ثبت کند</div>
+        <h2>اهداف حمله</h2>
+      </div>
+    </div>
+    <div id="targetComposer"></div>
+    <div id="targetList"><div class="loading-line">در حال بارگذاری...</div></div>
+  </div>
+</div>
+ 
+<!-- ============ ALLIANCE SCREEN ============ -->
+<div id="allianceScreen" class="screen">
+  <div class="topbar">
+    <div class="who"><strong style="font-size:14px;">اطلاعات اتحاد</strong></div>
+    <div class="topbar-actions"><button class="icon-btn" onclick="showScreen('menuScreen')">بازگشت به منو</button></div>
+  </div>
+  <div class="container">
+    <div class="page-title">
+      <div>
+        <div class="eyebrow">وضعیت هم‌پیمانان</div>
+        <h2>اطلاعات اتحاد</h2>
+      </div>
+    </div>
+    <div id="allianceBody"><div class="loading-line">در حال بارگذاری...</div></div>
+  </div>
+</div>
+ 
+<!-- ============ CALCULATOR SCREEN ============ -->
+<div id="calcScreen" class="screen">
+  <div class="topbar">
+    <div class="who"><strong style="font-size:14px;">ماشین‌حساب</strong></div>
+    <div class="topbar-actions"><button class="icon-btn" onclick="showScreen('menuScreen')">بازگشت به منو</button></div>
+  </div>
+  <div class="container">
+    <div class="calc-wrap">
+      <div class="calc-screen">
+        <div class="calc-expr" id="calcExpr">&nbsp;</div>
+        <div class="calc-result" id="calcResult">0</div>
+      </div>
+      <div class="calc-grid">
+        <button class="calc-btn clear" onclick="calcClear()">AC</button>
+        <button class="calc-btn op" onclick="calcInput('(')">(</button>
+        <button class="calc-btn op" onclick="calcInput(')')">)</button>
+        <button class="calc-btn op" onclick="calcInput('/')">÷</button>
+ 
+        <button class="calc-btn" onclick="calcInput('7')">7</button>
+        <button class="calc-btn" onclick="calcInput('8')">8</button>
+        <button class="calc-btn" onclick="calcInput('9')">9</button>
+        <button class="calc-btn op" onclick="calcInput('*')">×</button>
+ 
+        <button class="calc-btn" onclick="calcInput('4')">4</button>
+        <button class="calc-btn" onclick="calcInput('5')">5</button>
+        <button class="calc-btn" onclick="calcInput('6')">6</button>
+        <button class="calc-btn op" onclick="calcInput('-')">−</button>
+ 
+        <button class="calc-btn" onclick="calcInput('1')">1</button>
+        <button class="calc-btn" onclick="calcInput('2')">2</button>
+        <button class="calc-btn" onclick="calcInput('3')">3</button>
+        <button class="calc-btn op" onclick="calcInput('+')">+</button>
+ 
+        <button class="calc-btn" onclick="calcBackspace()">⌫</button>
+        <button class="calc-btn" onclick="calcInput('0')">0</button>
+        <button class="calc-btn" onclick="calcInput('.')">.</button>
+        <button class="calc-btn eq" onclick="calcEquals()">=</button>
+      </div>
+    </div>
+  </div>
+</div>
+ 
+<!-- ============ ADMIN SCREEN ============ -->
+<div id="adminScreen" class="screen">
+  <div class="topbar">
+    <div class="who"><strong style="font-size:14px;">پنل مدیریت</strong></div>
+    <div class="topbar-actions"><button class="icon-btn" onclick="showScreen('menuScreen')">بازگشت به منو</button></div>
+  </div>
+  <div class="container">
+    <div class="admin-section">
+      <h3>ساخت کاربر جدید</h3>
+      <p style="font-size:12.5px; color:var(--text-muted); margin-top:0;">یک نام کاربری و رمز عبور تصادفی ساخته می‌شود. آن را برای دوستتان ارسال کنید.</p>
+      <button class="btn btn-gold" style="width:auto; padding:10px 18px;" onclick="createUser()">ساخت کاربر</button>
+      <div id="newCredBox"></div>
+    </div>
+    <div class="admin-section">
+      <h3>اعضای پایگاه</h3>
+      <div id="userList"><div class="loading-line">در حال بارگذاری...</div></div>
+    </div>
+  </div>
+</div>
+ 
+<div class="toast" id="toast"></div>
+ 
+<script>
+/* ================= STORAGE HELPERS ================= */
+async function getData(key, fallback){
+  try{
+    const res = await window.storage.get(key, true);
+    if(!res) return fallback;
+    return JSON.parse(res.value);
+  }catch(e){
+    return fallback;
+  }
+}
+async function setData(key, value){
+  try{
+    const res = await window.storage.set(key, JSON.stringify(value), true);
+    return !!res;
+  }catch(e){
+    showToast('خطا در ذخیره‌سازی. دوباره تلاش کنید.');
+    return false;
+  }
+}
+ 
+function randomId(){ return 'id_' + Date.now() + '_' + Math.floor(Math.random()*10000); }
+function randomUsername(){
+  const words = ['jang','sepah','tir','shir','gorg','zobin','tigh','sang'];
+  const w = words[Math.floor(Math.random()*words.length)];
+  return w + Math.floor(100 + Math.random()*899);
+}
+function randomPassword(len){
+  const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz23456789';
+  let out = '';
+  for(let i=0;i<len;i++) out += chars[Math.floor(Math.random()*chars.length)];
+  return out;
+}
+function nowStr(){
+  return new Date().toLocaleString('fa-IR');
+}
+function showToast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(()=> t.classList.remove('show'), 2200);
+}
+function escapeHtml(str){
+  const div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
+}
+ 
+/* ================= SESSION (in-memory only) ================= */
+let currentUser = null;
+ 
+/* ================= BADGES ================= */
+function badgeSvg(role, size){
+  size = size || 24;
+  if(role === 'admin'){
+    return `<svg viewBox="0 0 32 32" width="${size}" height="${size}"><path d="M16 2 L28 7 V15 C28 23 22.5 27.5 16 30 C9.5 27.5 4 23 4 15 V7 Z" fill="#241d08" stroke="#c9a227" stroke-width="1.8"/><path d="M16 9 L16 21 M11 14 L21 14" stroke="#c9a227" stroke-width="2.2" stroke-linecap="round"/></svg>`;
+  }
+  return `<svg viewBox="0 0 32 32" width="${size}" height="${size}"><path d="M16 2 L28 7 V15 C28 23 22.5 27.5 16 30 C9.5 27.5 4 23 4 15 V7 Z" fill="#151d27" stroke="#7c93ab" stroke-width="1.8"/><circle cx="16" cy="16" r="5.5" fill="none" stroke="#7c93ab" stroke-width="2"/></svg>`;
+}
+ 
+/* ================= INIT / FIRST RUN ================= */
+async function ensureAdmin(){
+  const users = await getData('thg_users', null);
+  if(users === null){
+    const password = randomPassword(8);
+    const admin = { id: randomId(), username: 'admin', password: password, role: 'admin' };
+    await setData('thg_users', [admin]);
+    const box = document.getElementById('firstRunBox');
+    box.style.display = 'block';
+    box.innerHTML = `پایگاه برای اولین‌بار راه‌اندازی شد. این اطلاعات مدیر را یادداشت کنید، دیگر نمایش داده نمی‌شود:<br>
+      نام کاربری: <span class="code-pill">admin</span><br>
+      رمز عبور: <span class="code-pill">${escapeHtml(password)}</span>`;
+  }
+}
+ 
+async function ensureCollections(){
+  const n = await getData('thg_notifications', null);
+  if(n === null) await setData('thg_notifications', []);
+  const t = await getData('thg_targets', null);
+  if(t === null) await setData('thg_targets', []);
+  const a = await getData('thg_alliance', null);
+  if(a === null) await setData('thg_alliance', { content: 'هنوز اطلاعاتی درباره اتحاد ثبت نشده است.', editor: '', time: '' });
+}
+ 
+window.addEventListener('DOMContentLoaded', () => {
+  ensureAdmin();
+  ensureCollections();
+});
+ 
+/* ================= LOGIN / LOGOUT ================= */
+async function doLogin(){
+  const u = document.getElementById('loginUser').value.trim();
+  const p = document.getElementById('loginPass').value;
+  const errBox = document.getElementById('loginError');
+  errBox.textContent = '';
+  if(!u || !p){
+    errBox.textContent = 'نام کاربری و رمز عبور را وارد کنید.';
+    return;
+  }
+  const users = await getData('thg_users', []);
+  const found = users.find(x => x.username === u && x.password === p);
+  if(!found){
+    errBox.textContent = 'نام کاربری یا رمز عبور اشتباه است.';
+    return;
+  }
+  currentUser = found;
+  document.getElementById('loginUser').value = '';
+  document.getElementById('loginPass').value = '';
+  enterMenu();
+}
+ 
+function logout(){
+  currentUser = null;
+  showScreen('loginScreen');
+}
+ 
+function enterMenu(){
+  document.getElementById('menuWhoName').textContent = currentUser.username;
+  document.getElementById('menuWhoRole').textContent = currentUser.role === 'admin' ? 'فرمانده' : 'سرباز';
+  document.getElementById('menuRankBadge').innerHTML = badgeSvg(currentUser.role, 30);
+  document.getElementById('adminPanelBtn').style.display = currentUser.role === 'admin' ? 'inline-flex' : 'none';
+  showScreen('menuScreen');
+}
+ 
+/* ================= NAV ================= */
+function showScreen(id){
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+ 
+/* ================= GENERIC POST LIST (notifications / targets) ================= */
+function renderComposer(containerId, placeholder, submitFn, canPost){
+  const el = document.getElementById(containerId);
+  if(!canPost){ el.innerHTML = ''; return; }
+  el.innerHTML = `
+    <div class="composer">
+      <textarea id="${containerId}_input" placeholder="${placeholder}"></textarea>
+      <div class="composer-foot">
+        <button class="btn btn-gold" onclick="${submitFn}()">ثبت و ارسال</button>
+      </div>
+    </div>`;
+}
+ 
+function postCard(post, kind){
+  const liked = post.likes.includes(currentUser.username);
+  const authorRole = post.authorRole === 'admin' ? 'admin' : 'user';
+  const commentsHtml = post.comments.map(c => `
+    <div class="comment"><span><b>${escapeHtml(c.author)}:</b> ${escapeHtml(c.text)}</span><span style="color:var(--text-muted); white-space:nowrap;">${escapeHtml(c.time)}</span></div>
+  `).join('');
+  return `
+    <div class="post ${kind === 'target' ? 'attack' : 'notice'}">
+      <div class="post-head">
+        <div class="post-author">
+          <span class="author-badge">${badgeSvg(authorRole, 20)}</span>
+          <span>${escapeHtml(post.author)}</span>
+        </div>
+        <span class="post-time">${escapeHtml(post.time)}</span>
+      </div>
+      <div class="post-text">${escapeHtml(post.text)}</div>
+      <div class="post-actions">
+        <button class="action-btn ${liked ? 'liked':''}" onclick="toggleLike('${kind}','${post.id}')">
+          <svg viewBox="0 0 24 24" fill="${liked ? 'currentColor':'none'}" stroke="currentColor" stroke-width="1.8"><path d="M12 21s-7.5-4.6-10-9.3C.6 8 2.4 4.5 6 4.1c2-.2 3.7.8 6 3 2.3-2.2 4-3.2 6-3 3.6.4 5.4 3.9 4 7.6C19.5 16.4 12 21 12 21z"/></svg>
+          <span>${post.likes.length}</span>
+        </button>
+        <button class="action-btn" onclick="toggleComments('${kind}_${post.id}')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5a8.4 8.4 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.4 8.4 0 01-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.4 8.4 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+          <span>${post.comments.length}</span>
+        </button>
+      </div>
+      <div class="comments" id="comments_${kind}_${post.id}">
+        ${commentsHtml}
+        <div class="comment-input-row">
+          <input type="text" id="cinput_${kind}_${post.id}" placeholder="نظر خود را بنویسید...">
+          <button onclick="addComment('${kind}','${post.id}')">ارسال</button>
+        </div>
+      </div>
+    </div>`;
+}
+ 
+function toggleComments(key){
+  document.getElementById('comments_' + key).classList.toggle('open');
+}
+ 
+/* ---------- Notifications ---------- */
+async function openNotifications(){
+  showScreen('notifScreen');
+  renderComposer('notifComposer', 'یک اطلاعیه برای همه بنویسید...', 'submitNotification', currentUser.role === 'admin');
+  await refreshNotifications();
+}
+async function refreshNotifications(){
+  const list = await getData('thg_notifications', []);
+  const el = document.getElementById('notifList');
+  if(list.length === 0){ el.innerHTML = '<div class="empty-state">هنوز اطلاعیه‌ای ثبت نشده است.</div>'; return; }
+  el.innerHTML = list.slice().reverse().map(p => postCard(p, 'notif')).join('');
+}
+async function submitNotification(){
+  const input = document.getElementById('notifComposer_input');
+  const text = input.value.trim();
+  if(!text) return;
+  const list = await getData('thg_notifications', []);
+  list.push({ id: randomId(), author: currentUser.username, authorRole: currentUser.role, text, time: nowStr(), likes: [], comments: [] });
+  await setData('thg_notifications', list);
+  input.value = '';
+  showToast('اطلاعیه ارسال شد.');
+  await refreshNotifications();
+}
+ 
+/* ---------- Targets ---------- */
+async function openTargets(){
+  showScreen('targetScreen');
+  renderComposer('targetComposer', 'مختصات یا نام هدف حمله را بنویسید...', 'submitTarget', currentUser.role === 'admin');
+  await refreshTargets();
+}
+async function refreshTargets(){
+  const list = await getData('thg_targets', []);
+  const el = document.getElementById('targetList');
+  if(list.length === 0){ el.innerHTML = '<div class="empty-state">هنوز هدفی ثبت نشده است.</div>'; return; }
+  el.innerHTML = list.slice().reverse().map(p => postCard(p, 'target')).join('');
+}
+async function submitTarget(){
+  const input = document.getElementById('targetComposer_input');
+  const text = input.value.trim();
+  if(!text) return;
+  const list = await getData('thg_targets', []);
+  list.push({ id: randomId(), author: currentUser.username, authorRole: currentUser.role, text, time: nowStr(), likes: [], comments: [] });
+  await setData('thg_targets', list);
+  input.value = '';
+  showToast('هدف ثبت شد.');
+  await refreshTargets();
+}
+ 
+/* ---------- Like / Comment (shared logic) ---------- */
+async function toggleLike(kind, id){
+  const key = kind === 'notif' ? 'thg_notifications' : 'thg_targets';
+  const list = await getData(key, []);
+  const post = list.find(p => p.id === id);
+  if(!post) return;
+  const idx = post.likes.indexOf(currentUser.username);
+  if(idx >= 0) post.likes.splice(idx, 1);
+  else post.likes.push(currentUser.username);
+  await setData(key, list);
+  if(kind === 'notif') await refreshNotifications(); else await refreshTargets();
+}
+async function addComment(kind, id){
+  const key = kind === 'notif' ? 'thg_notifications' : 'thg_targets';
+  const inputEl = document.getElementById('cinput_' + kind + '_' + id);
+  const text = inputEl.value.trim();
+  if(!text) return;
+  const list = await getData(key, []);
+  const post = list.find(p => p.id === id);
+  if(!post) return;
+  post.comments.push({ author: currentUser.username, text, time: nowStr() });
+  await setData(key, list);
+  if(kind === 'notif') await refreshNotifications(); else await refreshTargets();
+  setTimeout(() => { const c = document.getElementById('comments_' + kind + '_' + id); if(c) c.classList.add('open'); }, 30);
+}
+ 
+/* ---------- Alliance ---------- */
+async function openAlliance(){
+  showScreen('allianceScreen');
+  await refreshAlliance();
+}
+async function refreshAlliance(){
+  const data = await getData('thg_alliance', { content: '', editor:'', time:'' });
+  const el = document.getElementById('allianceBody');
+  const editBtn = currentUser.role === 'admin'
+    ? `<div class="alliance-edit-row"><button class="btn btn-outline btn-sm" onclick="editAlliance()">ویرایش اطلاعات</button></div>`
+    : '';
+  el.innerHTML = `
+    <div class="parchment">${escapeHtml(data.content || 'هنوز اطلاعاتی ثبت نشده است.')}</div>
+    <div class="alliance-meta">${data.editor ? 'آخرین به‌روزرسانی توسط ' + escapeHtml(data.editor) + ' - ' + escapeHtml(data.time) : ''}</div>
+    ${editBtn}
+  `;
+}
+async function editAlliance(){
+  const data = await getData('thg_alliance', { content:'' });
+  const el = document.getElementById('allianceBody');
+  el.innerHTML = `
+    <div class="composer">
+      <textarea id="allianceInput" style="min-height:140px;">${escapeHtml(data.content || '')}</textarea>
+      <div class="composer-foot" style="gap:8px;">
+        <button class="btn btn-outline btn-sm" onclick="refreshAlliance()">انصراف</button>
+        <button class="btn btn-gold" style="width:auto; padding:9px 20px;" onclick="saveAlliance()">ذخیره</button>
+      </div>
+    </div>`;
+}
+async function saveAlliance(){
+  const text = document.getElementById('allianceInput').value.trim();
+  await setData('thg_alliance', { content: text, editor: currentUser.username, time: nowStr() });
+  showToast('اطلاعات اتحاد به‌روزرسانی شد.');
+  await refreshAlliance();
+}
+ 
+/* ================= CALCULATOR ================= */
+let calcExpr = '';
+function calcRender(){
+  document.getElementById('calcExpr').textContent = calcExpr || '\u00a0';
+  let result = '0';
+  const safe = calcExpr.replace(/[^0-9.+\-*/()]/g, '');
+  if(safe.length && /[0-9]$/.test(safe.trim())){
+    try{
+      const val = Function('"use strict"; return (' + safe + ')')();
+      if(typeof val === 'number' && isFinite(val)) result = String(Math.round(val * 1e10) / 1e10);
+    }catch(e){ /* incomplete expression, ignore */ }
+  }
+  document.getElementById('calcResult').textContent = result;
+}
+function calcInput(ch){
+  calcExpr += ch;
+  calcRender();
+}
+function calcBackspace(){
+  calcExpr = calcExpr.slice(0, -1);
+  calcRender();
+}
+function calcClear(){
+  calcExpr = '';
+  calcRender();
+}
+function calcEquals(){
+  const safe = calcExpr.replace(/[^0-9.+\-*/()]/g, '');
+  try{
+    const val = Function('"use strict"; return (' + safe + ')')();
+    calcExpr = (typeof val === 'number' && isFinite(val)) ? String(Math.round(val * 1e10) / 1e10) : '';
+  }catch(e){
+    calcExpr = '';
+  }
+  calcRender();
+}
+function openCalculator(){
+  calcExpr = '';
+  calcRender();
+  showScreen('calcScreen');
+}
+ 
+/* ================= ADMIN PANEL ================= */
+async function refreshUserList(){
+  const users = await getData('thg_users', []);
+  const el = document.getElementById('userList');
+  el.innerHTML = users.map(u => `
+    <div class="user-row">
+      <span>${escapeHtml(u.username)}</span>
+      <span class="u-role ${u.role}">${u.role === 'admin' ? 'فرمانده' : 'سرباز'}</span>
+    </div>
+  `).join('');
+}
+async function createUser(){
+  const users = await getData('thg_users', []);
+  let username;
+  do { username = randomUsername(); } while(users.some(u => u.username === username));
+  const password = randomPassword(6);
+  users.push({ id: randomId(), username, password, role: 'user' });
+  await setData('thg_users', users);
+  document.getElementById('newCredBox').innerHTML = `
+    <div class="new-cred-box">
+      کاربر جدید ساخته شد. این اطلاعات را برای دوستتان بفرستید:<br>
+      نام کاربری: <span class="code-pill">${escapeHtml(username)}</span><br>
+      رمز عبور: <span class="code-pill">${escapeHtml(password)}</span>
+    </div>`;
+  await refreshUserList();
+}
+ 
+/* refresh admin/user list when opening admin screen */
+document.getElementById('adminPanelBtn').addEventListener('click', refreshUserList);
 </script>
-
-
 </body>
-
 </html>
+ 
