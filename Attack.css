@@ -1,0 +1,92 @@
+body{
+
+    background:#111;
+    color:white;
+    font-family:tahoma;
+
+}
+
+
+.container{
+
+    width:90%;
+    max-width:700px;
+    margin:auto;
+
+}
+
+
+h1,h2{
+
+    text-align:center;
+
+}
+
+
+.card{
+
+    background:#222;
+    padding:20px;
+    margin:15px 0;
+    border-radius:15px;
+
+}
+
+
+label{
+
+    display:block;
+    margin-top:12px;
+
+}
+
+
+input,textarea{
+
+
+    width:100%;
+    padding:10px;
+    margin-top:5px;
+
+    background:#333;
+    color:white;
+
+    border-radius:8px;
+    border:1px solid #555;
+
+}
+
+
+
+textarea{
+
+    height:90px;
+
+}
+
+
+
+button{
+
+    margin-top:15px;
+
+    width:100%;
+    padding:12px;
+
+    background:#a00000;
+    color:white;
+
+    border:none;
+    border-radius:10px;
+
+    cursor:pointer;
+
+}
+
+
+
+button:hover{
+
+    background:red;
+
+}
