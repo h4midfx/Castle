@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
@@ -519,19 +518,28 @@ function badgeSvg(role, size){
   return `<svg viewBox="0 0 32 32" width="${size}" height="${size}"><path d="M16 2 L28 7 V15 C28 23 22.5 27.5 16 30 C9.5 27.5 4 23 4 15 V7 Z" fill="#151d27" stroke="#7c93ab" stroke-width="1.8"/><circle cx="16" cy="16" r="5.5" fill="none" stroke="#7c93ab" stroke-width="2"/></svg>`;
 }
  
-/* ================= INIT / FIRST RUN ================= */
+/* ================= INIT / FIXED SEED ACCOUNTS =================
+   Seeds two fixed accounts on first run:
+     admin -> username: winter   / password: server57
+     user  -> username: username / password: player1
+   If the users list already exists but is missing either account,
+   it adds the missing one(s) without touching any other accounts
+   that have since been created via the admin panel. */
 async function ensureAdmin(){
-  const users = await getData('thg_users', null);
-  if(users === null){
-    const password = randomPassword(8);
-    const admin = { id: randomId(), username: 'admin', password: password, role: 'admin' };
-    await setData('thg_users', [admin]);
-    const box = document.getElementById('firstRunBox');
-    box.style.display = 'block';
-    box.innerHTML = `پایگاه برای اولین‌بار راه‌اندازی شد. این اطلاعات مدیر را یادداشت کنید، دیگر نمایش داده نمی‌شود:<br>
-      نام کاربری: <span class="code-pill">admin</span><br>
-      رمز عبور: <span class="code-pill">${escapeHtml(password)}</span>`;
+  let users = await getData('thg_users', null);
+  if(users === null) users = [];
+  let changed = false;
+ 
+  if(!users.some(u => u.username === 'winter')){
+    users.push({ id: randomId(), username: 'winter', password: 'server57', role: 'admin' });
+    changed = true;
   }
+  if(!users.some(u => u.username === 'username')){
+    users.push({ id: randomId(), username: 'username', password: 'player1', role: 'user' });
+    changed = true;
+  }
+ 
+  if(changed) await setData('thg_users', users);
 }
  
 async function ensureCollections(){
@@ -826,4 +834,3 @@ document.getElementById('adminPanelBtn').addEventListener('click', refreshUserLi
 </script>
 </body>
 </html>
- 
