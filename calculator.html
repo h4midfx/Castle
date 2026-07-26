@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>اتاق جنگ | پنل مدیریت</title>
+<title>اتاق جنگ | ماشین‌حساب</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
@@ -266,20 +266,42 @@ body.center-page{ display:flex; align-items:center; justify-content:center; padd
 <body>
 
   <div class="topbar">
-    <div class="who"><strong style="font-size:14px;">پنل مدیریت</strong></div>
+    <div class="who"><strong style="font-size:14px;">ماشین‌حساب</strong></div>
     <div class="topbar-actions"><button class="icon-btn" onclick="window.location.href='menu.html'">بازگشت به منو</button></div>
   </div>
 
   <div class="container">
-    <div class="admin-section">
-      <h3>ساخت کاربر جدید</h3>
-      <p style="font-size:12.5px; color:var(--text-muted); margin-top:0;">یک نام کاربری و رمز عبور تصادفی ساخته می‌شود. آن را برای دوستتان ارسال کنید.</p>
-      <button class="btn btn-gold" style="width:auto; padding:10px 18px;" onclick="createUser()">ساخت کاربر</button>
-      <div id="newCredBox"></div>
-    </div>
-    <div class="admin-section">
-      <h3>اعضای پایگاه</h3>
-      <div id="userList"><div class="loading-line">در حال بارگذاری...</div></div>
+    <div class="calc-wrap">
+      <div class="calc-screen">
+        <div class="calc-expr" id="calcExpr">&nbsp;</div>
+        <div class="calc-result" id="calcResult">0</div>
+      </div>
+      <div class="calc-grid">
+        <button class="calc-btn clear" onclick="calcClear()">AC</button>
+        <button class="calc-btn op" onclick="calcInput('(')">(</button>
+        <button class="calc-btn op" onclick="calcInput(')')">)</button>
+        <button class="calc-btn op" onclick="calcInput('/')">÷</button>
+
+        <button class="calc-btn" onclick="calcInput('7')">7</button>
+        <button class="calc-btn" onclick="calcInput('8')">8</button>
+        <button class="calc-btn" onclick="calcInput('9')">9</button>
+        <button class="calc-btn op" onclick="calcInput('*')">×</button>
+
+        <button class="calc-btn" onclick="calcInput('4')">4</button>
+        <button class="calc-btn" onclick="calcInput('5')">5</button>
+        <button class="calc-btn" onclick="calcInput('6')">6</button>
+        <button class="calc-btn op" onclick="calcInput('-')">−</button>
+
+        <button class="calc-btn" onclick="calcInput('1')">1</button>
+        <button class="calc-btn" onclick="calcInput('2')">2</button>
+        <button class="calc-btn" onclick="calcInput('3')">3</button>
+        <button class="calc-btn op" onclick="calcInput('+')">+</button>
+
+        <button class="calc-btn" onclick="calcBackspace()">⌫</button>
+        <button class="calc-btn" onclick="calcInput('0')">0</button>
+        <button class="calc-btn" onclick="calcInput('.')">.</button>
+        <button class="calc-btn eq" onclick="calcEquals()">=</button>
+      </div>
     </div>
   </div>
 
@@ -287,36 +309,35 @@ body.center-page{ display:flex; align-items:center; justify-content:center; padd
 
   <script src="js/app.js"></script>
   <script>
-    const currentUser = requireAuth('admin');
+    const currentUser = requireAuth();
 
-    function refreshUserList(){
-      const users = getData('thg_users', []);
-      const el = document.getElementById('userList');
-      el.innerHTML = users.map(u => `
-        <div class="user-row">
-          <span>${escapeHtml(u.username)}</span>
-          <span class="u-role ${u.role}">${u.role === 'admin' ? 'فرمانده' : 'سرباز'}</span>
-        </div>
-      `).join('');
+    let calcExpr = '';
+    function calcRender(){
+      document.getElementById('calcExpr').textContent = calcExpr || '\u00a0';
+      let result = '0';
+      const safe = calcExpr.replace(/[^0-9.+\-*/()]/g, '');
+      if(safe.length && /[0-9]$/.test(safe.trim())){
+        try{
+          const val = Function('"use strict"; return (' + safe + ')')();
+          if(typeof val === 'number' && isFinite(val)) result = String(Math.round(val * 1e10) / 1e10);
+        }catch(e){ /* incomplete expression, ignore */ }
+      }
+      document.getElementById('calcResult').textContent = result;
     }
-
-    function createUser(){
-      const users = getData('thg_users', []);
-      let username;
-      do { username = randomUsername(); } while(users.some(u => u.username === username));
-      const password = randomPassword(6);
-      users.push({ id: randomId(), username, password, role: 'user' });
-      setData('thg_users', users);
-      document.getElementById('newCredBox').innerHTML = `
-        <div class="new-cred-box">
-          کاربر جدید ساخته شد. این اطلاعات را برای دوستتان بفرستید:<br>
-          نام کاربری: <span class="code-pill">${escapeHtml(username)}</span><br>
-          رمز عبور: <span class="code-pill">${escapeHtml(password)}</span>
-        </div>`;
-      refreshUserList();
+    function calcInput(ch){ calcExpr += ch; calcRender(); }
+    function calcBackspace(){ calcExpr = calcExpr.slice(0, -1); calcRender(); }
+    function calcClear(){ calcExpr = ''; calcRender(); }
+    function calcEquals(){
+      const safe = calcExpr.replace(/[^0-9.+\-*/()]/g, '');
+      try{
+        const val = Function('"use strict"; return (' + safe + ')')();
+        calcExpr = (typeof val === 'number' && isFinite(val)) ? String(Math.round(val * 1e10) / 1e10) : '';
+      }catch(e){
+        calcExpr = '';
+      }
+      calcRender();
     }
-
-    if(currentUser) refreshUserList();
+    calcRender();
   </script>
 </body>
 </html>

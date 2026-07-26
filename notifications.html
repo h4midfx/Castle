@@ -295,6 +295,7 @@ body.center-page{ display:flex; align-items:center; justify-content:center; padd
     }
 
     function submitNotification(){
+      if(currentUser.role !== 'admin'){ showToast('فقط فرمانده می‌تواند اطلاعیه ثبت کند.'); return; }
       const input = document.getElementById('notifComposer_input');
       const text = input.value.trim();
       if(!text) return;

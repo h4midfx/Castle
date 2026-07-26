@@ -295,6 +295,7 @@ body.center-page{ display:flex; align-items:center; justify-content:center; padd
     }
 
     function submitTarget(){
+      if(currentUser.role !== 'admin'){ showToast('فقط فرمانده می‌تواند هدف ثبت کند.'); return; }
       const input = document.getElementById('targetComposer_input');
       const text = input.value.trim();
       if(!text) return;
