@@ -1,4 +1,4 @@
-```javascript
+console.log("HAMID JS LOADED");
 const troops = {
 
     zanjir: {
@@ -631,7 +631,7 @@ function calculate() {
     );
 
 
-    result.innerHTML = 
+    result.innerHTML = `
 
         <h2>
             ${troop.icon}
@@ -705,4 +705,4 @@ function formatTime(totalMinutes) {
     return `${minutes} دقیقه و ${seconds} ثانیه`;
 
 }
-```
+
