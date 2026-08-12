@@ -1,4 +1,4 @@
-console.log("HAMID JS LOADED");
+
 const troops = {
 
     zanjir: {
