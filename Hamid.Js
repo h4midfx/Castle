@@ -631,7 +631,7 @@ function calculate() {
     );
 
 
-    result.innerHTML = `
+    result.innerHTML = 
 
         <h2>
             ${troop.icon}
